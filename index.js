@@ -15,6 +15,7 @@ Write and test functions with console.log
 
 */
 
+
 const getUserChoice = userInput => {
     userInput = userInput.toLowerCase();
     if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
@@ -32,33 +33,77 @@ const getComputerChoice = () => {
         case 1:
             return 'paper';
         case 2:
-            return 'scissors'
+            return 'scissors';
     }
 };
 
+let userScore = 0
+let compScore = 0
+let drawScore = 0
+let draw = "This round is a tie!"
+let compWin = "Sorry, computer won!"
+let userWin = "Congratulations, you won!"
+
 const determineWinner = (userChoice, computerChoice) => {
     if(userChoice === computerChoice) {
-        return "This game is a tie!";
+        return draw
     }
     if (userChoice === 'rock') {
         if(computerChoice === 'paper') {
-            return "Sorry, computer won!"
+            return compWin
         } else {
-            return "Congratulations, you won!"
+            return userWin
         }
     }
     if (userChoice === 'paper') {
         if(computerChoice === 'scissors') {
-            return "Sorry, computer won!"
+            return compWin
         } else {
-            return "Congratulations, you won!"
+            return userWin
         }
     }
     if (userChoice === 'scissors') {
         if(computerChoice === 'rock') {
-            return "Sorry, computer won!"
+            return compWin
         } else {
-            return "Congratulations, you won!"
+            return userWin
         }
     }
 };
+
+
+const playRound = () => {
+    //let player = prompt("Rock, Paper, or Scissors?")
+    const userChoice = getComputerChoice('paper');
+    const computerChoice = getComputerChoice();
+    console.log(`You threw: ${userChoice}`);
+    console.log(`The computer threw: ${computerChoice}`);
+
+    console.log(determineWinner(userChoice, computerChoice));
+}
+
+
+const game = () => {
+    playRound()
+    playRound()
+    playRound()
+    playRound()
+    playRound()
+    let result = playRound()
+    if(result === compWin) {
+        compScore++;
+    } else if(result === userWin) {
+        userScore++;
+    } else {
+        drawScore++;
+    }
+
+    if(userScore >= 3) {
+        console.log("Player Wins Game!")
+    }
+    if(compScore >= 3) {
+        console.log("Computer Wins Game!")
+    }
+}
+
+game()
